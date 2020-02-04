@@ -14,10 +14,9 @@ app = Flask(__name__)
 
 # RUTAS
 @app.route('/', methods=["GET","POST"])
-def index():
-    return render_template('index.html')
-
-
+def home():
+    diccionarios = coleccion.find()
+    return render_template ('index.html', registros=diccionarios, tituloDelListado="Listado de Gastos") 
 
 @app.route("/nuevo")
 def nuevoGasto():
@@ -34,6 +33,18 @@ def entrarNuevoGasto():
         coleccion.insert_one(registro)
         return redirect (url_for ('nuevoGasto'))
     return redirect (url_for ('nuevoGasto'))
+
+@app.route("/borrar/<id>")
+def borrarGasto(id):
+    buscarPorId = {"_id": ObjectId(id)}
+    datosRegistro = coleccion.find_one(buscarPorId)
+    return render_template ('/borrar.html', datosRegistro=datosRegistro)
+
+@app.route("/confirmar-borrado/<string:id>")
+def confirmadoBorrado(id):
+    buscarPorId = {"_id": ObjectId(id)}
+    coleccion.delete_one(buscarPorId)
+    return redirect (url_for('home'))
 
 
 if __name__ == '__main__':
