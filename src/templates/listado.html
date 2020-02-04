@@ -1,0 +1,29 @@
+<!-- MUESTRA UN LISTADO DE LOS REGISTROS -->
+<!-- Los registros a mostrar viene dado pora la variable que le pasamos registros -->
+<!-- Le pasamos el título del listado por la variable tituloDeListado -->
+
+<br>
+<h2>{{ tituloDelListado }}</h2>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr class="bg-primary">
+            <td>Acciones</td>
+            <td>Fecha</td>
+            <td>Titulo</td>
+            <td>Importe</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for gasto in registros %}
+            <tr>
+                <td>
+                    <a class="btn btn-sm btn-success" href="/buscar/">Editar</a>
+                    <a class="btn btn-sm btn-danger" href="/borrar/{{ gasto._id }}">Borrar</a>
+                </td>
+                <td>{{ gasto.fecha }}</td>
+                <td>{{ gasto.titulo }}</td>
+                <td>{{ gasto.importe }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
