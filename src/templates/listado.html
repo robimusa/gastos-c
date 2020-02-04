@@ -17,7 +17,7 @@
         {% for gasto in registros %}
             <tr>
                 <td>
-                    <a class="btn btn-sm btn-success" href="/buscar/">Editar</a>
+                    <a class="btn btn-sm btn-success" href="/editar/{{ gasto._id }}">Editar</a>
                     <a class="btn btn-sm btn-danger" href="/borrar/{{ gasto._id }}">Borrar</a>
                 </td>
                 <td>{{ gasto.fecha }}</td>

@@ -1,0 +1,7 @@
+<h3>Confirma que quieres borrar este gasto: </h3>
+<form action="/editar-confirmado/{{ datosRegistro._id }}">
+    <input type="date" name="fecha" placeholder="Fecha" value = {{ datosRegistro.fecha }} >
+    <input type="text" name="titulo" placeholder="Título" value = {{ datosRegistro.titulo }}>
+    <input type="numero" name="importe" placeholder="Importe" value = {{ datosRegistro.importe }}>
+    <button type="submit">ACTUALIZAR!</button>
+</form>

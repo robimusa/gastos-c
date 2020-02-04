@@ -46,6 +46,36 @@ def confirmadoBorrado(id):
     coleccion.delete_one(buscarPorId)
     return redirect (url_for('home'))
 
+@app.route("/mostrar-todos")
+def mostrarTodos():
+    diccionarios = coleccion.find()
+    tituloDelListado = "Listado de todos los recordatorios"
+    return render_template ('mostrar-todos.html', registros=diccionarios, tituloDelListado=tituloDelListado)
+
+@app.route("/editar/<id>")
+def editarGasto(id):
+    buscarPorId = {"_id": ObjectId(id)}
+    datosRegistro = coleccion.find_one(buscarPorId)
+    return render_template ('/editar.html', datosRegistro=datosRegistro)
+
+# @app.route("/editar-confirmado/<id>", methods=['GET','POST'])
+# def actualizar(id):
+#     if request.method=='POST':
+#         fecha = request.form['fecha']
+#         titulo = request.form['titulo']
+#         importe = request.form['importe']
+#         registro = {"fecha":fecha,"titulo":titulo,"importe": importe}
+#         coleccion.insert_one(registro)
+
+#         nombre = request.form['nombre']
+#         telefono = request.form['telefono']
+#         email = request.form['email']
+#         buscarPor = {"_id": ObjectId(id)}
+#         diccionario = {"nombre":nombre,"telefono":telefono,"email":email}
+#         coleccionContactos.update_one(buscarPor, {"$set": diccionario})
+#         return redirect (url_for ('home'))
+#     return redirect (url_for ('home'))
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT",5000))
