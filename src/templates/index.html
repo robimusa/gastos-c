@@ -2,14 +2,16 @@
 
 <!-- HEADER -->
     {% block header %}
-    {# esto es un comentario en jinja2 #}
-    {% endblock %}
-
-<!-- MAIN -->
+        {# esto es un comentario en jinja2 #}
+        {% include "navegacion.html" %}
+        {% endblock %}
+        
+        <!-- MAIN -->
     {% block main %}
-    <h1>PROYECTO GASTOS VEHICULO</h1>
+        {% include "listado.html" %}
     {% endblock %}  
 
 <!-- FOOTER -->
     {% block footer %}
+
     {% endblock %} 

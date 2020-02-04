@@ -11,14 +11,29 @@ coleccion = db['gastoscoche']
 
 app = Flask(__name__)
 
-registro = {"prueba":"prueba"}
-# db.coleccion.insertOne(registro)
-coleccion.insert_one(registro)
 
 # RUTAS
 @app.route('/', methods=["GET","POST"])
 def index():
     return render_template('index.html')
+
+
+
+@app.route("/nuevo")
+def nuevoGasto():
+    diccionarios = coleccion.find().limit(5)
+    return render_template ('nuevo.html', registros=diccionarios, tituloDelListado="Listado de tus últimos 5 gastos: ")
+
+@app.route("/entrar-nuevo", methods=['GET','POST'])
+def entrarNuevoGasto():
+    if request.method=='POST':
+        fecha = request.form['fecha']
+        titulo = request.form['titulo']
+        importe = request.form['importe']
+        registro = {"fecha":fecha,"titulo":titulo,"importe": importe}
+        coleccion.insert_one(registro)
+        return redirect (url_for ('nuevoGasto'))
+    return redirect (url_for ('nuevoGasto'))
 
 
 if __name__ == '__main__':
